@@ -16,3 +16,5 @@ if __name__ == "__main__":
         if "Messages" in response:
             for message in response["Messages"]:
                 process_message(message)
+
+                consumer.delete(message['ReceiptHandle'])
