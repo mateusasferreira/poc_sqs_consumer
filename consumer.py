@@ -7,11 +7,6 @@ from credentials import get_credentials
 
 load_dotenv()
 
-def process_message(payload):
-    payload = json.loads(payload['Body'])
-    message = payload["message"]
-    print(f"New message arrived: {message}")
-
 def consume():
     credentials = get_credentials()
 
@@ -27,6 +22,5 @@ def consume():
         MaxNumberOfMessages=10
     )
 
-    if ("Messages" in response):
-        for message in response['Messages']:
-            process_message(message)
+    return response
+
