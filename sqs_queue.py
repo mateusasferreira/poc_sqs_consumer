@@ -3,10 +3,6 @@ import json
 import boto3
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 class Queue:
 
     def __init__(self, queue_url: str):
