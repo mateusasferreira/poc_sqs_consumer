@@ -1,6 +1,6 @@
 # About
 
-This is a Proof-of-concept (COP) on how to build a simple consumer for an SQS queue with python and boto3
+This is a Proof-of-concept (POC) on how to build a simple consumer for an SQS queue with python and boto3
 
 # Requirements:
 
