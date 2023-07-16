@@ -26,6 +26,8 @@ if __name__ == "__main__":
                 try:
                     process_message(message)
                 except Exception as error:
+                    queue.delay(message['ReceiptHandle'], 60)
+
                     print(f"Error while processing message: {error}")
                 else:
                     queue.delete(message['ReceiptHandle'])

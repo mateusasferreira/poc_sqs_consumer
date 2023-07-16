@@ -40,7 +40,8 @@ class Queue:
     def consume(self):
         response = self.client.receive_message(
             QueueUrl=self.queue_url,
-            MaxNumberOfMessages=10
+            MaxNumberOfMessages=10,
+            WaitTimeSeconds=5
         )
 
         return response
@@ -49,6 +50,15 @@ class Queue:
         response = self.client.delete_message(
             QueueUrl=self.queue_url,
             ReceiptHandle=receipt_handle
+        )
+
+        return response
+
+    def delay(self, receipt_handle, delay_seconds):
+        response = self.client.change_message_visibility(
+            QueueUrl=self.queue_url,
+            ReceiptHandle=receipt_handle,
+            VisibilityTimeout=delay_seconds
         )
 
         return response
