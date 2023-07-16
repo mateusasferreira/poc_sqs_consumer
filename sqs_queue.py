@@ -1,11 +1,16 @@
 
 import json
 import boto3
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Queue:
 
     def __init__(self, queue_url: str):
-        credentials = self.__get_credentials()
+        credentials = self.__get_session_credentials()
 
         self.queue_url = queue_url
         self.client = boto3.client(
@@ -16,8 +21,12 @@ class Queue:
         )
 
 
-    def __get_credentials(self):
-        client = boto3.client('sts')
+    def __get_session_credentials(self):
+        client = boto3.client(
+            'sts',
+            aws_access_key_id=os.environ.get("AWS_ACCESS_KEY"),
+            aws_secret_access_key=os.environ.get("AWS_SECRET_KEY"),
+        )
 
         response = client.get_session_token()
 
